@@ -1,105 +1,178 @@
-const PastebinAPI = require('pastebin-js'),
-pastebin = new PastebinAPI('EMWTMkQAVfJa9kM-MRUrxd5Oku1U7pgL')
-const {makeid} = require('./id');
-const QRCode = require('qrcode');
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-let router = express.Router()
-const pino = require("pino");
-const {
-	default: Wasi_Tech,
-	useMultiFileAuthState,
-	jidNormalizedUser,
-	Browsers,
-	delay,
-	makeInMemoryStore,
-} = require("@whiskeysockets/baileys");
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1737874207490861"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHATSAPP BOT QR SCANER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&amp;display=swap" rel="stylesheet">
+    <title>QR</title>
+    <style>
+        .bg {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: 400% 400%;
+            animation: AnimateBG 25s ease infinite;
+        }
 
-function removeFile(FilePath) {
-	if (!fs.existsSync(FilePath)) return false;
-	fs.rmSync(FilePath, {
-		recursive: true,
-		force: true
-	})
-};
-const {
-	readFile
-} = require("node:fs/promises")
-router.get('/', async (req, res) => {
-	const id = makeid();
-	async function WASI_MD_QR_CODE() {
-		const {
-			state,
-			saveCreds
-		} = await useMultiFileAuthState('./temp/' + id)
-		try {
-			let Qr_Code_By_Wasi_Tech = Wasi_Tech({
-				auth: state,
-				printQRInTerminal: false,
-				logger: pino({
-					level: "silent"
-				}),
-				browser: Browsers.macOS("Desktop"),
-			});
+        @keyframes AnimateBG {
+            0% {
+                background-position: 0% 50%
+            }
 
-			Qr_Code_By_Wasi_Tech.ev.on('creds.update', saveCreds)
-			Qr_Code_By_Wasi_Tech.ev.on("connection.update", async (s) => {
-				const {
-					connection,
-					lastDisconnect,
-					qr
-				} = s;
-				if (qr) await res.end(await QRCode.toBuffer(qr));
-				if (connection == "open") {
-					await delay(5000);
-					let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
-					await delay(800);
-				   let b64data = Buffer.from(data).toString('base64');
-				   let session = await Qr_Code_By_Wasi_Tech.sendMessage(Qr_Code_By_Wasi_Tech.user.id, { text: '' + b64data });
-	
-				   let WASI_MD_TEXT = `
-*_Session Connected By Wasi Tech_*
-*_Made With 🤍_*
-______________________________________
-╔════◇
-║ *『AMAZING YOU'VE CHOSEN WASI MD』*
-║ _You Have Completed the First Step to Deploy a Whatsapp Bot._
-╚════════════════════════╝
-╔═════◇
-║  『••• 𝗩𝗶𝘀𝗶𝘁 𝗙𝗼𝗿 𝗛𝗲𝗹𝗽 •••』
-║❒ *Ytube:* _youtube.com/@wasitech1
-║❒ *Owner:* _https://wa.me/message/THZ3I25BYZM2E1_
-║❒ *Repo:* _https://github.com/wasixd/WASI-MD_
-║❒ *WaGroup:* _https://chat.whatsapp.com/FF6YuOZTAVB6Lu65cnY5BN_
-║❒ *WaChannel:* _https://whatsapp.com/channel/0029VaDK8ZUDjiOhwFS1cP2j_
-║❒ *Plugins:* _https://github.com/Itxxwasi 
-╚════════════════════════╝
-_____________________________________
-	
-_Don't Forget To Give Star To My Repo_`
-	 await Qr_Code_By_Wasi_Tech.sendMessage(Qr_Code_By_Wasi_Tech.user.id,{text:WASI_MD_TEXT},{quoted:session})
+            50% {
+                background-position: 100% 50%
+            }
 
+            100% {
+                background-position: 0% 50%
+            }
+        }
 
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Outfit";
+            background: linear-gradient(-45deg, #4a90e2, #3ac569, #9b59b6, #e74c3c);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-					await delay(100);
-					await Qr_Code_By_Wasi_Tech.ws.close();
-					return await removeFile("temp/" + id);
-				} else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
-					await delay(10000);
-					WASI_MD_QR_CODE();
-				}
-			});
-		} catch (err) {
-			if (!res.headersSent) {
-				await res.json({
-					code: "Service is Currently Unavailable"
-				});
-			}
-			console.log(err);
-			await removeFile("temp/" + id);
-		}
-	}
-	return await WASI_MD_QR_CODE()
-});
-module.exports = router
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        jsl.code {
+            overflow: hidden;
+            background: linear-gradient(-45deg, #f1c40f, #3498db, #2ecc71, #e74c3c);
+            background-size: 400% 400%;
+            animation: gradient 8s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            height: 110vh;
+            margin: 0px;
+
+        }
+
+        p.legend {
+            color: #fff;
+            font-size: 1em;
+            font-weight: 400;
+            padding: 0em 1.1em;
+            margin-top: 0.1em;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        :root {
+            --main-color: hsl(212, 45%, 89%);
+            --principalText-color: hsl(218, 44%, 22%);
+            --secondText-color: hsl(220, 15%, 55%);
+        }
+
+        #content {
+            display: flex;
+            flex-direction: column;
+            width: 22rem;
+            text-align: center;
+            background-color: #000000;
+            padding: 1rem;
+            border-radius: 14px;
+        }
+
+        #QR-content img {
+            border-radius: 10px;
+            width: 20rem;
+        }
+
+        #title-container {
+            padding: 1rem 1rem 0 1rem;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        #description-container {
+            padding: 0 2.5rem 0 2.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        #p-legend {
+            font-size: 1em;
+            font-weight: 400;
+            padding: 0em 1.1em;
+            margin-top: 0.1em;
+        }
+
+        .reload-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db; /* Blue color */
+            color: #fff; /* White text color */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .reload-button:hover {
+            background-color: #2980b9; /* Darker blue color on hover */
+        }
+    </style>
+    <script>
+        var timeleft = 30;
+        var downloadTimer = setInterval(function () {
+            if (timeleft <= 0) {
+                clearInterval(downloadTimer);
+                document.getElementById("progressBar").remove();
+                document.getElementById("main").innerHTML = "QR Expired! Please reload";
+                document.getElementById("legend").innerHTML = ""
+            }
+            document.getElementById("progressBar").value = 30 - timeleft;
+            timeleft -= 1;
+        }, 1000);
+    </script>
+</head>
+<body>
+<div class="bg">
+    <div id="content">
+        <div id="QR-content">
+            <img id="qr-image" src="/server" alt="QR CODE">
+        </div>
+        <div id="title-container">
+            <h2 id="main">WHATSAPP-BOT QR</h2>
+            <p class="legend" id="legend">Scan The QR Code</p>
+        </div>
+        <div id="description-container">
+            <p id="semi" class="legend"></p>
+            <progress value="0" max="30" id="progressBar"></progress>
+        </div>
+        <a href="javascript:history.go(0)" class="reload-button">Reload Page</a>
+    </div>
+</div>
+</body>
+</html>
